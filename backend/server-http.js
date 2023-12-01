@@ -92,7 +92,7 @@ app.delete('/', (request, response) => {
   }
 })
 
-const PORT = 7080
+const PORT = process.env.PORT || 7080
 app.listen(PORT, () => {
   console.log(`Open http://localhost:${PORT}`)
 })

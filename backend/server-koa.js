@@ -1,8 +1,8 @@
-const fs = require('node:fs');
-const Koa = require('koa');
-const { koaBody } = require('koa-body');
-const Router = require('@koa/router');
-const { v4: uuid } = require('uuid');
+import fs from 'node:fs'
+import Koa from 'koa'
+import { koaBody } from 'koa-body'
+import Router from '@koa/router'
+import { v4 as uuid } from 'uuid'
 
 const getBooks = () => {
   try {
@@ -46,29 +46,29 @@ const bookRepository = {
   }
 }
 
-const router = new Router();
-const app = new Koa();
-
-// app.use(koaBody({
-//   urlencoded: true
-// }))
+const router = new Router()
+const app = new Koa()
+app
+  .use(koaBody({
+    urlencoded: true
+  }))
+  .use(router.routes())
+  .use(router.allowedMethods())
 
 router.get('/', (ctx, next) => {
-  ctx.body = 'Hello Student';
-});
+  ctx.body = 'Hello Student'
+})
 
 router.get('/books', (ctx, next) => {
-  ctx.body = bookRepository.find();
-});
+  ctx.body = bookRepository.find()
+})
 
-router.post('/books/1', koaBody({
-  urlencoded: true
-}), async (ctx, next) => {
-  console.log(ctx.request);
+router.post('/books', async (ctx, next) => {
+  console.log(ctx.request.body)
+  // ctx.body = ctx.request.body;
 
   // const book = bookRepository.add()
-  // ctx.body = book;
-  ctx.body = '404'
+  ctx.body = 'test';
 
   next()
 })
@@ -81,11 +81,7 @@ router.post('/books/1', koaBody({
 //
 // })
 
-app
-  .use(router.routes())
-  .use(router.allowedMethods());
-
 const PORT = 3000
 app.listen(PORT, () => {
   console.log(`Open http://localhost:${PORT}`)
-});
+})

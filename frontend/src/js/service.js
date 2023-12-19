@@ -1,4 +1,10 @@
-const TICKET_BASE_URL = 'http://localhost:7080'
+const TICKET_BASE_URL = 'https://ahj-live-dnd-http.onrender.com'
+
+// XMLHttpRequest -- старый -- axios
+// Fetch API -- без библиотек
+// axios --- / got / ofetch / ...
+
+// ссылок --- new URL
 
 export class TicketService {
   static async create (newTicket) {
@@ -6,10 +12,10 @@ export class TicketService {
       method: 'POST',
       body: JSON.stringify(newTicket),
       headers: {
-        'Content-Type': 'text/json;charset=UTF-8'
+        'Content-Type': 'application/json'
       }
     })
-    return await response.json()
+    return await response.json() // -> response.text() -> JSON.parse(text)
   }
 
   static async update (ticket) {
@@ -49,6 +55,7 @@ export class TicketService {
 
   static async all () {
     const url = new URL(TICKET_BASE_URL)
+    // SearchParams
     url.searchParams.append('method', 'allTickets')
     const response = await fetch(url)
     return await response.json()

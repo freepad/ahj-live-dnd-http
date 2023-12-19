@@ -17,6 +17,7 @@ export class TicketRepository {
       id: uuidv4()
     }
     this.#tickets.push(ticket)
+    console.log(ticket)
     return ticket
   }
 

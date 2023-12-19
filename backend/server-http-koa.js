@@ -13,7 +13,6 @@ app
   .use(router.allowedMethods())
 
 router.get('/', (ctx) => {
-  console.log(ctx)
   switch (ctx.request.query.method) {
     case 'allTickets':
       ctx.body = ticketRepository.find()

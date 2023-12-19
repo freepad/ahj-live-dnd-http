@@ -1,3 +1,1 @@
-class Controller {
-
-}
+class Controller {}

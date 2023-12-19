@@ -30,13 +30,13 @@ jobs:
           node-version: ${{ matrix.node-version }}
 
       - name: Install dependencies
-        run: npm install
+        run: yarn --cwd frontend
 
 #      - name: Run linters
 #        run: npm run lint
 
       - name: Build
-        run: npm run build
+        run: yarn --cwd frontend build
 
       - name: Setup Pages
         uses: actions/configure-pages@v2
@@ -44,7 +44,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
         with:
-          path: 'dist'
+          path: 'frontend/dist'
 
       - name: Deploy to GitHub Pages
         id: deployment
